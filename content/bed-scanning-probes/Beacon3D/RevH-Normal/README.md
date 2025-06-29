@@ -31,7 +31,7 @@ Don't worry, these can all be resolved fairly easily by carefully reading the er
 On a command shell (`ssh`) to the printer, run the following
 
 ```
-mkdir -p /home/mks/qidi-klipper-backup
+mkdir -p /home/mks/qidi-klipper-backup-`date '+%Y%m%d_%H%M%S'`
 (cd /home/mks; tar cvf - klipper printer_data/config) | (cd /home/mks/qidi-klipper-backup; tar xf -)
 
 ```
