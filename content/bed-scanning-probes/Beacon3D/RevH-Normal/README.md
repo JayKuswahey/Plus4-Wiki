@@ -40,6 +40,11 @@ mkdir -p /home/mks/qidi-klipper-backup-${date}-${reason}
 (cd /home/mks; tar cvf - klipper printer_data/config) | (cd /home/mks/qidi-klipper-backup-${date}-${reason}; tar xf -)
 ```
 
+> [!NOTE]
+> As an example, this is what multiple backups would look like
+> 
+> ![multiple backups with dates](../../../images/backup-date-reason_001.png)
+
 This will backup your klipper installation and all of your printer configuration files to the `/home/mks/qidi-klipper-backup` directory for easy recovery
 
 ***
