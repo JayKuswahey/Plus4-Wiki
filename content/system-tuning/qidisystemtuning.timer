@@ -1,0 +1,9 @@
+[Unit]
+Description=Run qidiAffinityAndNice 60 seconds after boot
+
+[Timer]
+OnBootSec=60
+Unit=qidisystemtuning.service
+
+[Install]
+WantedBy=timers.target
