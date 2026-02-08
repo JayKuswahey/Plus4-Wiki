@@ -82,9 +82,9 @@ systemctl enable qidisystemtuning.service
 systemctl enable qidisystemtuning.timer
 systemctl start qidisystemtuning.timer
 ```
-This will download 2 files, force a reload of `systemd` itself, and then tell it that both the service (applying nice and affinity) and timer (running this 60 seconds after boot) should be considered enabled. Then, it will manually run the timer, and therefore apply the nice and affinity after 60 seconds.
+This will download 2 files, force a reload of `systemd` itself, and then tell it that both the service (applying nice and affinity) and timer (running this 60 seconds after boot) should be considered enabled. Then, you will manually initiate the timer, and as a result apply the nice and affinity rules after 60 seconds waiting.
 
-Execute `/opt/scripts/qidiAffinityAndNice status` after 70 seconds, to see the difference with the output in step 3.
+After waiting for 70 seconds, execute the command `/opt/scripts/qidiAffinityAndNice status`, to see the difference with the output in step 3.
 
 5. Now exit out of the root shell like so with the following command:
 
@@ -92,9 +92,9 @@ Execute `/opt/scripts/qidiAffinityAndNice status` after 70 seconds, to see the d
 exit
 ```
 
-## Verifying systemd implementation
+# Verifying systemd implementation
 
-### The systemd service
+## The systemd service
 
 Run the following command:
 
@@ -122,7 +122,7 @@ Feb 08 12:14:26 mkspi qidiAffinityAndNice[5966]: 1543 (process ID) old priority 
 Feb 08 12:14:26 mkspi systemd[1]: Reloaded Qidi Xindi, Klipper, webcam process isolation and niceness.
 ```
 
-### The systemd timer
+## The systemd timer
 
 Run the following command:
 
@@ -133,7 +133,7 @@ and you'll see when the timer was initiated
 ```
 n/a                          n/a        Sun 2026-02-08 09:42:42 UTC  2h 36min ago qidisystemtuning.timer       qidisystemtuning.service
 ```
-## Verifying CPU Performance Mode
+# Verifying CPU Performance Mode
 
 Run the following command:
 
@@ -170,7 +170,7 @@ The above output is informing us that the CPU will choose a frequency between 12
 
 This verifies that the CPU on the Plus4 is now operating in its highest possible performance mode.
 
-### Verifying Process Niceness
+## Verifying Process Niceness
 
 While in the same logs (you executed command `journalctl -u qidisystemtuning`, you can scroll in logs with arrow up and down, or Ctrl+F for page **F**orward and Ctrl+B for page **B**ack)
 
@@ -217,7 +217,7 @@ Feb 08 09:43:05 mkspi qidiAffinityAndNice[1560]: 1518 (process ID) old priority 
 Feb 08 09:43:05 mkspi systemd[1]: Started Qidi Xindi, Klipper, webcam process isolation and niceness.
 ```
 
-#### Verify niceness externally
+### Verify niceness externally
 
 To verify the Unix scheduling niceness changes run the `top` command and take note of the nice level for the `xindi`, `mjpg_streamer`,
 and `nginx` processes (in the `NI` column). The values should be set to `1`, `2`, and `1` respectively.  The script does not adjust the niceness level of
@@ -242,7 +242,7 @@ Showing unique Process Niceness levels:
 
 where the number at the start represents the Nice level of the process. 
 
-## What if I restart `mjpg_streamer` by changing values in `webcam.txt`?
+# What if I restart `mjpg_streamer` by changing values in `webcam.txt`?
 
 In the event that you modify the `webcam.txt` parameters, this will intiate a new set of `mjpg_streamer` process/threads
 and the tuning script will need to be manually re-run if you don't wish to power-cycle the printer.  This can be achieved
@@ -254,7 +254,7 @@ sudo systemctl reload qidisystemtuning.service
 
 which will re-apply the tuning to the currently running system
 
-## Deactivating the Tuning
+# Deactivating the tuning
 
 If you wish to deactivate the system performance tuning, without uninstalling the script, run the following command:
 
@@ -264,7 +264,7 @@ sudo systemctl stop qidisystemtuning.service
 
 This can be useful when making comparisons as to how the printer behaves with, and without, the tuning parameters active
 
-## Uninstalling
+# Uninstalling
 
 In the event that the tuning script is causing any issues, it can be uninstalled via the following procedure:
 
