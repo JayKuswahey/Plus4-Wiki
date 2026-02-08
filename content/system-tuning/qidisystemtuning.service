@@ -1,0 +1,16 @@
+[Unit]
+Description=Qidi Xindi, Klipper, webcam process isolation and niceness
+Requires=graphical.target
+Conflicts=rescue.target emergency.target
+After=klipper.service moonraker.service webcamd.service
+
+[Service]
+Type=oneshot
+ExecStart=/etc/init.d/qidiAffinityAndNice start
+ExecStop=/etc/init.d/qidiAffinityAndNice stop
+ExecReload=/etc/init.d/qidiAffinityAndNice reload
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=graphical.target
