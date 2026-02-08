@@ -82,9 +82,9 @@ systemctl enable qidisystemtuning.service
 systemctl enable qidisystemtuning.timer
 systemctl start qidisystemtuning.timer
 ```
-This will download 2 files, force a reload of `systemd` itself, and then tell it that both the service (applying nice and affinity) and timer (running this 60 seconds after boot) should be considered enabled. Then, you will manually initiate the timer, and as a result apply the nice and affinity rules after 60 seconds waiting.
+This will download 2 files, force a reload of `systemd` itself, and then tell it that both the service (applying nice and affinity) and timer (running this 60 seconds after boot) should be considered enabled. Then, you will manually initiate the timer, and as a result apply the nice and affinity rules after 30 seconds waiting.
 
-After waiting for 70 seconds, execute the command `/opt/scripts/qidiAffinityAndNice status`, to see the difference with the output in step 3.
+After waiting for 40 seconds, execute the command `/opt/scripts/qidiAffinityAndNice status`, to see the difference with the output in step 3.
 
 5. Now exit out of the root shell like so with the following command:
 
