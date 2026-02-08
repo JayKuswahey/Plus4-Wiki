@@ -242,7 +242,7 @@ Showing unique Process Niceness levels:
 
 where the number at the start represents the Nice level of the process. 
 
-# What if I restart `mjpg_streamer` by changing values in `webcam.txt`?
+## What if I restart `mjpg_streamer` by changing values in `webcam.txt`?
 
 In the event that you modify the `webcam.txt` parameters, this will intiate a new set of `mjpg_streamer` process/threads
 and the tuning script will need to be manually re-run if you don't wish to power-cycle the printer.  This can be achieved
