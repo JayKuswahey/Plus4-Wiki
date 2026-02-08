@@ -78,11 +78,20 @@ This downloads the tuning script and runs it once, so you can see the current si
 wget -O - https://raw.githubusercontent.com/qidi-community/Plus4-Wiki/refs/heads/main/content/system-tuning/qidisystemtuning.service > /etc/systemd/system/qidisystemtuning.service
 wget -O - https://raw.githubusercontent.com/qidi-community/Plus4-Wiki/refs/heads/main/content/system-tuning/qidisystemtuning.timer > /etc/systemd/system/qidisystemtuning.timer
 systemctl daemon-reexec ## This is potentially overkill, but just to be sure
-systemctl enable qidisystemtuning.service
-systemctl enable qidisystemtuning.timer
-systemctl start qidisystemtuning.timer
+systemctl enable --now qidisystemtuning.service
+systemctl enable --now qidisystemtuning.timer
 ```
 This will download 2 files, force a reload of `systemd` itself, and then tell it that both the service (applying nice and affinity) and timer (running this 60 seconds after boot) should be considered enabled. Then, you will manually initiate the timer, and as a result apply the nice and affinity rules after 30 seconds waiting.
+
+Output of the last 2 commands should be that there were links created:
+
+```
+root@mkspi:/etc/systemd/system# systemctl enable qidisystemtuning.service
+Created symlink /etc/systemd/system/graphical.target.wants/qidisystemtuning.service → /etc/systemd/system/qidisystemtuning.service.
+root@mkspi:/etc/systemd/system# systemctl enable qidisystemtuning.timer
+Created symlink /etc/systemd/system/timers.target.wants/qidisystemtuning.timer → /etc/systemd/system/qidisystemtuning.timer.
+root@mkspi:/etc/systemd/system#
+```
 
 After waiting for 40 seconds, execute the command `/opt/scripts/qidiAffinityAndNice status`, to see the difference with the output in step 3.
 
@@ -271,10 +280,8 @@ In the event that the tuning script is causing any issues, it can be uninstalled
 Log into your printer via ssh and run the following command:
 
 ```
-sudo systemctl stop qidisystemtuning.service
-sudo systemctl stop qidisystemtuning.timer
-sudo systemctl disable qidisystemtuning.service
-sudo systemctl disable qidisystemtuning.timer
+sudo systemctl disable --now qidisystemtuning.service
+sudo systemctl disable --now qidisystemtuning.timer
+sudo rm -f /opt/scripts/qidiAffinityAndNice /etc/systemd/system/qidisystemtuning*
 sudo systemctl daemon-reload
-sudo rm -f /opt/scripts/qidiAffinityAndNice
 ```
