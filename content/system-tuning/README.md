@@ -1,10 +1,10 @@
 > [!IMPORTANT]
-> The original version of this manual was implement around `init`, which has since been replaced with `systemd`.  This has now been resolved. Please remove the old method like this
+> The original version of this manual was implemented using the `init` system, which has since been replaced with `systemd`. This has now been resolved. Please remove the old method like this
 > ```
 > rm -f /etc/rc3.d/S99tuning
 > rm -f /etc/init.d/tuning
 > ```
-> and re-download and apply the updated tuning script if you installed a version prior to 8th Feb 2026.
+> and re-download and apply the updated method if you installed a version prior to 8th Feb 2026.
 
 > [!IMPORTANT]
 > DO NOT EXECUTE THIS MANUAL WHILE YOU'RE PRINTING SOMETHING :)
